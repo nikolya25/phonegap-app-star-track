@@ -77,6 +77,7 @@ function init() {
   // Handle Cordova Device Ready Event
   $$(document).on('deviceready', function deviceIsReady() {
     console.log('Device is ready!');
+    navigator.notification.alert('Device is ready!');
 	setupPush();
   });
   $$(document).on('click', '.panel .search-link', function searchLink() {
@@ -366,7 +367,7 @@ function setupPush() {
 
 	push.on('registration', function(data) {
 		console.log("registration event: " + data.registrationId);
-		alert("registration event: " + data.registrationId);
+		navigator.notification.alert("registration event: " + data.registrationId);
 		
 		var oldRegId = localStorage.getItem('registrationId');
 		if (oldRegId !== data.registrationId) {
@@ -378,7 +379,7 @@ function setupPush() {
 
 	push.on('error', function(e) {
 		console.log("push error = " + e.message);
-		alert("push error = " + e.message);
+		navigator.notification.alert("push error = " + e.message);
 	});
 	
 	push.on('notification', function(data) {
