@@ -366,6 +366,8 @@ function setupPush() {
 
 	push.on('registration', function(data) {
 		console.log("registration event: " + data.registrationId);
+		alert("registration event: " + data.registrationId);
+		
 		var oldRegId = localStorage.getItem('registrationId');
 		if (oldRegId !== data.registrationId) {
 			// Save new registration ID
@@ -376,6 +378,7 @@ function setupPush() {
 
 	push.on('error', function(e) {
 		console.log("push error = " + e.message);
+		alert("push error = " + e.message);
 	});
 	
 	push.on('notification', function(data) {
