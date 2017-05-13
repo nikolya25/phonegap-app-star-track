@@ -75,12 +75,9 @@ function init() {
   });
 
   // Handle Cordova Device Ready Event
-  $$(document).on('deviceready', function deviceIsReady() {
-    console.log('Device is ready!');
-    navigator.notification.alert('Device is ready!');
-	setupPush();
-  });
-  $$(document).on('click', '.panel .search-link', function searchLink() {
+  document.addEventListener("deviceready",onDeviceReady, false);
+  
+ $$(document).on('click', '.panel .search-link', function searchLink() {
     // Only change route if not already on the index
     //  It would be nice to have a better way of knowing this...
     var indexPage = $$('.page[data-page=index]');
@@ -107,6 +104,12 @@ function init() {
   });
   $$(document).on('submit', '#search', searchSubmit);
 }
+  
+function onDeviceReady() {
+    console.log('Device is ready!');
+    navigator.notification.alert('Device is ready!');
+	setupPush();
+  }
 
 /**
  * Search
@@ -381,14 +384,4 @@ function setupPush() {
 		console.log("push error = " + e.message);
 		navigator.notification.alert("push error = " + e.message);
 	});
-	
-	push.on('notification', function(data) {
-        console.log('notification event');
-        navigator.notification.alert(
-            data.message,         // message
-            null,                 // callback
-            data.title,           // title
-            'Ok'                  // buttonName
-        );
-    });
 }
